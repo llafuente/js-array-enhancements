@@ -1,6 +1,6 @@
 {
   "name": "array-enhancements",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Many helpful functions for javascript Arrays",
   "main": "./index.js",
   "keywords": [

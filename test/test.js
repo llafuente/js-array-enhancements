@@ -23,13 +23,13 @@
     });
 
 
-    test("Array.append", function (t) {
+    test("Array.add", function (t) {
         var ar = [1,2,3],
             ar2 = [4,5,6],
             ar3 = [7,8,9];
 
-        t.deepEqual(Array.append(ar, ar2), [1, 2, 3, 4, 5, 6], "append two arrays");
-        t.deepEqual(Array.append(ar, ar2, ar3), [1, 2, 3, 4, 5, 6, 7, 8, 9], "append three arrays");
+        t.deepEqual(Array.add(ar, ar2), [1, 2, 3, 4, 5, 6], "add two arrays");
+        t.deepEqual(Array.add(ar, ar2, ar3), [1, 2, 3, 4, 5, 6, 7, 8, 9], "add three arrays");
 
         t.end();
     });
