@@ -28,6 +28,15 @@ Get a random value, the array must be condensed
 Array.unique(Array) -> Array
 Remove duplicates from an array
 
+# compatibility layer for old browsers
+Array.prototype.reduce
+Array.prototype.filter
+Array.prototype.reduceRight
+Array.prototype.some
+Array.prototype.every
+Array.prototype.map
+Array.prototype.forEach
+
 ```
 
 ## Install
