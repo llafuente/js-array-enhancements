@@ -29,7 +29,7 @@
             ar3 = [7,8,9];
 
         t.deepEqual(Array.add(ar, ar2), [1, 2, 3, 4, 5, 6], "add two arrays");
-        t.deepEqual(Array.add(ar, ar2, ar3), [1, 2, 3, 4, 5, 6, 7, 8, 9], "add three arrays");
+        t.deepEqual(Array.add(ar, ar2, ar3), [1, 2, 3, 4, 5, 6, 7, 8, 9], "add   three arrays");
 
         t.end();
     });
@@ -112,6 +112,31 @@
 
         t.end();
     });
+
+    test("Array.column", function (t) {
+        var ar = [{x: 1, y: 2}, {x: 2}, {y: "b"}, {z: {x:1}}];
+
+        t.deepEqual(Array.column(ar, "x"), [1, 2], "Array.column x");
+        t.deepEqual(Array.column(ar, "y"), [2, "b"], "Array.column y");
+        t.deepEqual(Array.column(ar, "z"), [{x:1}], "Array.column z");
+
+        t.end();
+    });
+
+    test("Array.kmap", function (t) {
+        var ar = [
+            {key: "a", value: 1},
+            {key: "b", value: 2},
+            {key: "c", value: 3},
+        ];
+
+        t.deepEqual(Array.kmap(ar, "key"), {a: {key: "a", value: 1}, b: {key: "b", value: 2}, c: {key: "c", value: 3}}, "Array.kmap");
+
+        t.end();
+    });
+
+
+
 
 
 }());
