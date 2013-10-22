@@ -6,6 +6,82 @@
         test = tap.test;
 
 
+    test("Array.chunk", function (t) {
+        t.deepEqual(Array.chunk(['a', 'b', 'c', 'd', 'e'], 2), [ [ 'a', 'b' ], [ 'c', 'd' ], [ 'e' ] ], "Array.chunk 2");
+        t.deepEqual(Array.chunk(['a', 'b', 'c', 'd', 'e'], 2, true), [ [ 'a', 'b' ], [ , , 'c' ], [ , , , 'd' ], [ , , , , 'e' ] ], "Array.chunk 2 preserve keys");
+        t.end();
+    });
+
+    test("Array.column", function (t) {
+        var ar = [{x: 1, y: 2}, {x: 2}, {y: "b"}, {z: {x:1}}];
+
+        t.deepEqual(Array.column(ar, "x"), [1, 2], "Array.column x");
+        t.deepEqual(Array.column(ar, "y"), [2, "b"], "Array.column y");
+        t.deepEqual(Array.column(ar, "z"), [{x:1}], "Array.column z");
+
+        t.end();
+    });
+
+    test("Array.combine", function (t) {
+        var ar = [1,2,3],
+            ar2 = [4,5,6],
+            ar3 = [7,8,9],
+            ar4 = [10];
+
+        Array.combine(ar, ar2);
+        t.deepEqual(ar, [1, 2, 3, 4, 5, 6], "combine two args");
+
+        Array.combine(ar, ar3, ar4);
+        t.deepEqual(ar, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "combine three args");
+
+
+        t.end();
+    });
+
+
+
+    test("Array.count_values", function (t) {
+        var ar = ['J. Karjalainen', 'J. Karjalainen', 60, '60', 'J. Karjalainen', 'j. karjalainen', 'Fastway', 'FASTWAY', 'Fastway', 'fastway', 'YUP'],
+            r1 = Array.count_values(ar, false),
+            r2 = Array.count_values(ar, true);
+
+        t.deepEqual(r1, { '60': 2,
+            'J. Karjalainen': 3,
+            'j. karjalainen': 1,
+            Fastway: 2,
+            FASTWAY: 1,
+            fastway: 1,
+            YUP: 1 }, "count_values case");
+
+
+        t.deepEqual(r2, { '60': 2, 'j. karjalainen': 4, fastway: 4, yup: 1 }, "count_values icase");
+
+
+        t.end();
+    });
+
+
+    test("Array.product", function (t) {
+        var ar = [2, 4, 6, 8],
+            r1 = Array.product(ar);
+
+        t.deepEqual(r1, 384, "Array.product");
+
+        t.end();
+    });
+
+    test("Array.dense", function (t) {
+        var ar = [];
+
+        ar[10] = 2;
+        ar[20] = 4;
+
+        t.deepEqual(Array.dense(ar), [2,4], "Array.dense");
+
+        t.end();
+    });
+
+
     test("Array.ize", function (t) {
         t.deepEqual(Array.ize(arguments), [ t ], "from args error");
         var obj = {x: 1};
@@ -76,21 +152,7 @@
         t.end();
     });
 
-    test("Array.combine", function (t) {
-        var ar = [1,2,3],
-            ar2 = [4,5,6],
-            ar3 = [7,8,9],
-            ar4 = [10];
 
-        Array.combine(ar, ar2);
-        t.deepEqual(ar, [1, 2, 3, 4, 5, 6], "combine two args");
-
-        Array.combine(ar, ar3, ar4);
-        t.deepEqual(ar, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "combine three args");
-
-
-        t.end();
-    });
 
     test("Array.random", function (t) {
         var ar = [1,2,3];
@@ -113,15 +175,7 @@
         t.end();
     });
 
-    test("Array.column", function (t) {
-        var ar = [{x: 1, y: 2}, {x: 2}, {y: "b"}, {z: {x:1}}];
 
-        t.deepEqual(Array.column(ar, "x"), [1, 2], "Array.column x");
-        t.deepEqual(Array.column(ar, "y"), [2, "b"], "Array.column y");
-        t.deepEqual(Array.column(ar, "z"), [{x:1}], "Array.column z");
-
-        t.end();
-    });
 
     test("Array.kmap", function (t) {
         var ar = [
@@ -134,7 +188,6 @@
 
         t.end();
     });
-
 
 
 
