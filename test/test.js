@@ -1,5 +1,6 @@
 (function () {
     "use strict";
+    require("ass");
 
     require("../index.js");
     var tap = require("tap"),
@@ -40,10 +41,10 @@
 
 
 
-    test("Array.count_values", function (t) {
+    test("Array.countValues", function (t) {
         var ar = ['J. Karjalainen', 'J. Karjalainen', 60, '60', 'J. Karjalainen', 'j. karjalainen', 'Fastway', 'FASTWAY', 'Fastway', 'fastway', 'YUP'],
-            r1 = Array.count_values(ar, false),
-            r2 = Array.count_values(ar, true);
+            r1 = Array.countValues(ar, false),
+            r2 = Array.countValues(ar, true);
 
         t.deepEqual(r1, { '60': 2,
             'J. Karjalainen': 3,
@@ -51,10 +52,10 @@
             Fastway: 2,
             FASTWAY: 1,
             fastway: 1,
-            YUP: 1 }, "count_values case");
+            YUP: 1 }, "countValues case");
 
 
-        t.deepEqual(r2, { '60': 2, 'j. karjalainen': 4, fastway: 4, yup: 1 }, "count_values icase");
+        t.deepEqual(r2, { '60': 2, 'j. karjalainen': 4, fastway: 4, yup: 1 }, "countValues icase");
 
 
         t.end();
@@ -189,6 +190,73 @@
         t.end();
     });
 
+    test("Array.sum", function (t) {
+        t.deepEqual(Array.sum([1, 2, 3]), 6, "Array.sum");
+        t.deepEqual(Array.sum([1, 2, 3, 4]), 10, "Array.sum");
+        t.deepEqual(isNaN(Array.sum([1, 2, 3, 4, "x"])), true, "Array.sum NaN");
+
+        t.end();
+    });
+
+
+    test("Array.fill", function (t) {
+        t.deepEqual(Array.fill(0, 5, 9), [9,9,9,9,9], "Array.fill");
+        t.deepEqual(Array.fill(1, 5, 9), [,9,9,9,9,9], "Array.fill");
+
+        t.end();
+    });
+
+    test("Array.sortObject", function (t) {
+
+        t.deepEqual(Array.sortObject([
+            {value: 1},
+            {value: 7},
+            {value: 5},
+            {value: 2}
+        ], "value"), [
+            {value: 1},
+            {value: 2},
+            {value: 5},
+            {value: 7}
+        ], "Array.sortObject");
+
+        t.deepEqual(Array.sortObject([
+            {value: "a"},
+            {value: "z"},
+            {value: "h"},
+            {value: "b"}
+        ], "value"), [
+            {value: "a"},
+            {value: "b"},
+            {value: "h"},
+            {value: "z"}
+        ], "Array.sortObject");
+
+        t.end();
+    });
+
+    test("Array.shuffle", function (t) {
+
+        var shu = Array.shuffle([1, 2, 3]);
+
+        t.deepEqual(shu.length, 3, "Array.shuffle");
+
+        t.deepEqual(shu.sort(), [1, 2, 3], "Array.shuffle");
+
+        t.end();
+    });
+
+
+    test("Array.pad", function (t) {
+
+        var input = [12, 10, 9];
+
+        t.deepEqual(Array.pad(input, 5, 0), [12, 10, 9, 0, 0], "Array.pad");
+        t.deepEqual(Array.pad(input, -7, -1), [-1, -1, -1, -1, 12, 10, 9], "Array.pad");
+        t.deepEqual(Array.pad(input, 2, "noop"), [12, 10, 9], "Array.pad");
+
+        t.end();
+    });
 
 
 
