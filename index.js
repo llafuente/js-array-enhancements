@@ -1,6 +1,6 @@
 (function () {
     "use strict";
 
-    require("./lib/arrays.js");
+    module.exports = require("./lib/arrays.js");
 
 }());
