@@ -258,6 +258,25 @@
         t.end();
     });
 
+    test("array.mapAsync", function (t) {
+
+        var input = [500,250,1500],
+            sum = 0,
+            keys = [];
+
+        array.mapAsync(input, function(v, k, done) {
+            sum += v;
+            keys.push(k);
+            setTimeout(done, k * 250);
+        }, function() {
+            t.deepEqual(keys, [0, 1, 2], "loop all keys");
+            t.deepEqual(sum, 2250, "sum is correct");
+
+            t.end();
+        });
+
+    });
+
 
 
 }());
