@@ -290,6 +290,65 @@
     });
 
 
+    test("array.mapSerial", function (t) {
+        var input = [500,250,1500],
+            sum = 0,
+            keys = [];
+
+        array.mapSerial(input, function(v, k, next, end) {
+            sum += v;
+            keys.push(k);
+            setTimeout(next, k * 250);
+        }, function() {
+            t.deepEqual(keys, [0, 1, 2], "loop all keys");
+            t.deepEqual(sum, 2250, "sum is correct");
+
+            t.end();
+        });
+    });
+
+    test("array.mapSerial end", function (t) {
+        var input = [500,250,1500],
+            sum = 0,
+            keys = [];
+
+        array.mapSerial(input, function(v, k, next, end) {
+            sum += v;
+            keys.push(k);
+            if (k == 1) {
+                end();
+            } else {
+                setTimeout(next, k * 250);
+            }
+        }, function() {
+            t.deepEqual(keys, [0, 1], "loop all keys");
+            t.deepEqual(sum, 750, "sum is correct");
+
+            t.end();
+        });
+    });
+
+
+    test("array.mapSerial keyed result", function (t) {
+        var input = [500,250,1500],
+            sum = 0,
+            keys = ["x", "y", "z"];
+
+        array.mapSerial(input, function(v, k, next, end) {
+            next(input[k], keys[k]);
+        }, function(result) {
+            t.deepEqual(result, {
+                x: 500,
+                y: 250,
+                z: 1500
+            }, "correct result object");
+
+            t.end();
+        });
+    });
+
+
+
     
 
 
