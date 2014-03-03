@@ -47,6 +47,20 @@ var array = require("array-enhancements");
 
   Second argument (ci) enable case insensitive comparison
 
+* array.sortObject(Array arr, String key)
+
+  Sort an array of Objects by given key.
+
+
+* array.chunk(Array array, Number size[, Boolean preserve_keys = false])
+
+  Split an array into chunks
+
+
+* array.shuffle(Array **&**arr)
+
+  This function shuffles (randomizes the order of the elements in) an array.
+
 
 * array.pad(Array arr, Number size, Mixed value): Array
 
@@ -69,8 +83,11 @@ var array = require("array-enhancements");
 
   Create a new dense array from given one
 
+* array.random(Array arr): Mixed
 
-* array.rand(Array arr, Number len): Number|Array
+  Picks one random value of an array
+
+* array.rand(Array arr, Number len): Array
 
   Picks one or more random entries out of an array, and returns the key (or keys) of the random entries.
 
